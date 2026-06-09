@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/CorneliusPGT/plant-contracts/gen/paymentpb;paymentpb";
+
+service PaymentService {
+    rpc PayOrder(PayOrderRequest) returns (PayOrderResponse);
+}
+
+message PayOrderRequest {
+    string order_uuid = 1;
+    string user_uuid = 2;
+    PaymentMethod payment_method = 3;
+}
+
+message PayOrderResponse {
+    string transaction_uuid = 1;
+}
+
+enum PaymentMethod {
+    UNKNOWN = 0;
+    CARD = 1;
+    SBP = 2;
+    CREDIT_CARD = 3;
+    INVESTOR_MONEY = 4;
+}
