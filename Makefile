@@ -2,7 +2,9 @@
 
 .PHONY: gen
 
-gen:
+gen: gen-payment gen-inventory
+
+gen-payment:
 	protoc \
 		--proto_path=proto \
 		--go_out=gen \
@@ -11,5 +13,12 @@ gen:
 		--go-grpc_opt=paths=source_relative \
 		payment/payment.proto
 
-# когда добавишь inventory:
-# inventory/inventory.proto
+gen-inventory:
+	protoc \
+		--proto_path=proto \
+		--go_out=gen \
+		--go_opt=paths=source_relative \
+		--go-grpc_out=gen \
+		--go-grpc_opt=paths=source_relative \
+		inventory/inventory.proto
+
